@@ -1,33 +1,40 @@
 //section으로 스크롤 다운
 var winH = $(window).height();
+$(window).resize(function(){
+    winH = $(window).height();
+});
 if(winH < 700) {
     winH = 700;
 } else {};
     
+var secH = winH - 80;
+var sectionH = $('section').height();
+
 $('#nav a, #m_nav a').click(function(event){
     event.preventDefault;
-    console.log(winH);
     var index = $(this).parent('li').index();
-    $('html').animate({scrollTop:winH*index},500,'swing')
+    $('html').animate({scrollTop:sectionH*index},500,'swing')
 });
 
-var secH = winH - 60;
 
 $(window).scroll(function(){
     var yPos = $(window).scrollTop();
 
-    if(yPos < winH) {
+    if(yPos < secH) {
         $('#nav li').removeClass('now_on');
         $('#nav li').eq(0).addClass('now_on');
     } else if(yPos >= secH && yPos < secH*2) {
         $('#nav li').removeClass('now_on');
         $('#nav li').eq(1).addClass('now_on');
+        $('#section02 .h03, .site_list ul, #section02 .movebar').addClass('animationed');
     } else if(yPos >= secH*2 && yPos < secH*3) {
         $('#nav li').removeClass('now_on');
         $('#nav li').eq(2).addClass('now_on');
+        $('#section03 .h03, .design_list ul , #section03 .movebar').addClass('animationed');
     } else  {
         $('#nav li').removeClass('now_on');
         $('#nav li').eq(3).addClass('now_on');
+        $('#section04 .h03, .contact_num, .contact_em, .contact_img , #section04 .movebar').addClass('animationed');
     } 
 });
 
